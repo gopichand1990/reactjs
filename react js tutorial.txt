@@ -1,0 +1,338 @@
+Introduction to React(Le wagon):
+  Features:
+     it uses virtualDom instead of RealDom which is used to render changes in code
+which is costly(real DOM(Document object model) .instead it renders recent changes made in Dom using virtualDom  using smart diffing algorithm which is of order o(n)and make  changes only when there are chenages in actual dom else it doesn't change and loads page.
+  React can be used where u have so much dynamism in ur UI
+  it is a javascript library which is used for UI development develped by Facebook engineers
+  it uses jsx: which is java script xml format whatever code we write gets converted finally into jsx which is then processed.
+  if we give something in code it is considered as string and if in braces it is treated as javascript expression.
+  jsx prevents malicious attacks
+   const title = response.potentiallyMaliciousInput;
+// This is safe:
+const element = <h1>{title}</h1>;
+this will not allow injection attacks to happen it will replace with string before updating it.
+  arrow functions in react:
+     we can't use thi or super in functions in react to avoid this we use arrow function to access those values.
+	 
+  eg use case:
+      if there is a use case where u have maps application and u want to drag and drop location to search areas then in such case u can use react.
+software dependencies:
+   node js which is 
+   then npm install -g create-react-app which is package manager
+   Function binding in js:
+      This plays important role in js if we want to call refer some variable or function we use this.but if we call this.variable or function we refer to object instead of variable to avoid that we use binfd method
+	  eg:
+	   var a="gopi"
+	   var b="tinku"
+	   function showname(return this.name)
+	   if we call 
+	   showname(a)
+	   object is returned
+	   so to avoid that
+	   showName.bind(a)()
+	   we get gopi
+	   
+	   app.js is main file what ever file u creatd newly under components code can be written there and we should import it in app.js and then we can use it.
+	   components has 2 items
+	   1.props
+	   2.state
+	      props can just be accessed can't be changed.
+          to use props we need to use constructor
+ as Constructor(props){
+     super(props);
+    }
+  state can be declared and can be used as key value pair and can be used 
+  proptypes:
+     suppose we wan;t to set datatyoes of props then we use prop tyoes
+	 this is an external package and if we wnt to use them 
+	 npm i -s prop-types in cmd
+	 we have to import proptypes in component.js file using
+	 import PropTypes from 'prop-types'
+	 they can be used as  
+	 constpropTypes = {
+	   name: propTypes.string.isRequired,
+	   title: propTypes.string.isRequired,
+	   onclicked: propTypes.function
+	   };
+	   (this code should be before class)
+	   and u should use them using
+	   className.propTypes= propTypes;
+	   
+	  component life cycle:
+	     componentwillmount() -runs before loading
+		 render
+		 componentdidmount()- runs after loading
+		 
+		 
+		 update:
+		   componentwillupdate(prevprops,prevstate)
+		   render(0
+		   shouldcomponentupdate() return boolean valuetakes prevprops and prevstate as input and if it is false it doesn't change component.
+		   componentdidupdate()
+		   
+		  controlled and uncontrolled inputs:
+		    controled we can control what value we can give or set default value
+			in uncontrolled we can't restrict value.
+			
+			conditional rendering strategies:
+			   we can put some conitions in part of data to be rendered and render then if shouldrendertitle: true is true else false.
+			   
+			   
+			   
+user authentication:
+https://stormpath.com/blog/build-a-react-app-with-user-authentication
+https://www.analyticsvidhya.com/blog/2016/04/complete-tutorial-tree-based-modeling-scratch-in-python/
+
+componentlifecycle:
+ 1.componentwillmount:before rendering if we want to check something on props or state shouldn't use axios call(Ajax) in this phase
+ 2.componentdidmount: will mountg here rendering starts hered
+ 3.componentWillRecieveprops(next props): after rendering if any state is changed 
+ 4.shouldcomponentupdate:based on any state change it will re render
+ 5.componentwillupdate:if changed state i twill update
+ 6.componentdidupdate: it will check whetehr it is updated
+ 7.componentWillunmount:closing all connections
+ 
+ 
+ axios: will to used to get or set data from rest api using http protocol
+ it should be written in componentdidmount not componentwillmount
+  mobilenoValidation(){
+     var no=document.getElementById("mobileno");
+	 var validno=/^[789]\d{9}$/
+	   if(validno.test(no)){
+	       return;
+		   }
+		else{
+		  $('#errMessage').text('enter correct mobile no');
+		  document.getElementById('mobileno').style.color = 'red';
+		  }
+		  }
+		  
+  emailvalidation(){
+     var email=document.getElementById("emailid");
+	 var validemail=/^[A-z]*[0-9]+[A-z]*@[a-z]*.com/
+	 if(validemain.test(email)){
+	    return;
+		}
+     else{
+	   $('#errmessage').text("entervalid email id")
+	   document.getElementById("mobileno").style.color='red';
+	   }
+	   }
+	   
+  resumeValidation(){
+     if(e.target.input.files.length){
+	     const upload_file=e.target.input.files[0];
+		 const formdate=new formData();
+		 formData.append('file',file);
+		 
+		const request= axios.post(this.props.url + '/upload',file);
+		 .then(function(response){
+		      return;
+			  }
+		  else{
+		    $('#errmessage').text('upload resume');
+			document.getElementById("upload resume").style.color='red';
+			}
+			);
+			}
+			}
+			
+//complete
+https://stackoverflow.com/questions/41453224/uploading-a-file-with-reactjs-and-dealing-with-c-fakepath-file
+
+
+  class Login extends React.Component{
+   constructor(props){
+     super(props);
+     this.props = {
+        //sample url location where to be uploaded
+       url: "www.google.com"
+     }
+ this.state={
+   firstname: "",
+   lastname: "",
+   username: "",
+   emailid: "",
+   password: "",
+   mobileno: "",
+   gender: "",
+   dateofbirth: ""
+ }
+ };
+ emailvalidation(){
+     var email=document.getElementById("emailid");
+     var validemail=/^[A-z]*[0-9]+[A-z]*@[a-z]*.com/
+     if(validemain.test(email)){
+        return;
+        }
+     else{
+       $('#errmessage').text("entervalid email id")
+       document.getElementById("mobileno").style.color='red';
+       }
+    }
+  
+mobilenoValidation(){
+     var no=document.getElementById("mobileno");
+     var validno=/^[789]\d{9}$/
+       if(validno.test(no)){
+           return;
+           }
+        else{
+          $('#errMessage').text('enter correct mobile no');
+          document.getElementById('mobileno').style.color = 'red';
+          }
+    }
+  
+  resumeValidation(){
+     if(e.target.input.files.length){
+         const upload_file=e.target.input.files[0];
+         const formdate=new formData();
+         formData.append('file',file);
+         
+         const request= axios.post(this.props.url + '/upload',file)
+         .then(function(response){
+              return;
+            
+            $('#errmessage').text('upload resume');
+            document.getElementById("upload resume").style.color='red';
+            }
+            );
+            }
+    }
+      
+  handleClick =(e) => {
+  this.setState({
+     [e.target.name]: e.target.value
+  });
+  };
+ render(){
+   return(
+      <div>
+        <br />
+            <div classNAme="firstname">
+                    <input 
+                            name="firstname"
+                            placeholder="Firstname"
+                            required
+                            value={this.state.firstname}
+                            onChange ={e => handleClick(e)}
+                    />
+            </div> 
+        <br />
+        
+            <div className="lastname">
+                    <input
+                            name="lastname"
+                            placeholder="Lastname"
+                            required
+                            value={this.state.lastname}
+                            onChange ={e => handleClick(e)}
+            />
+            </div>
+       <br />
+       
+          <div className="username">
+               <input 
+                  name="username"
+                            placeholder="Username"
+                            required minLength={5} maxLength={15}
+                            value={this.state.username}
+                            onChange ={e => handleClick(e)}
+                        />
+            </div>
+          
+          
+       <br />
+       
+          <div className="password">
+              <input 
+                            name="password"
+                            placeholder="Password"
+                            type="password"
+                            required minLength={8} maxLength={15}
+                            value={this.state.password}
+                            onChange ={e => handleClick(e)}
+       
+                    />
+          </div>
+          
+       <br />
+          <div className="emailid">
+              <input 
+                            name="emailid"
+                            placeholder="emailid"
+                            required 
+                            value={this.state.emailid}
+                            onChange ={e => "handleClick(e);emailValidation(e)"}
+             />
+          </div>
+       <br />
+       
+          <div className="mobileno">
+                    <input 
+                            name="mobileno"
+                            placeholder="mobileno"
+                            required minLength={10}
+                            value={this.state.mobileno}
+                            onChange ={e => "handleClick(e);mobileValidation(e)"}
+                    />
+          </div>
+       <br />
+       
+       <div>
+         <div className="gender">
+                <label>
+                    <input type="radio" value="male" placeholder="male"/>
+                </label>
+         </div>
+      
+      <br />
+         <div className="gender">
+             <label>
+                 <input type="radio"  value="female" placeholder="female"/>
+            </label>
+         </div>
+         required
+         </div>
+        
+        <br />
+        
+        <div className="upload Resume">
+           <input
+                type="file"
+                placeholder="upload resume"
+                required
+                value={this.props.value}
+                onChange ={e => "handleClick(e);resumeValidation(e)"}/>
+        </div>
+                
+         
+       <div className="button">
+           <button  type="submit">
+              submit
+           </button>
+       </div>
+       
+       <br />
+       
+    </div>
+       
+       
+   );
+ }
+}
+
+ReactDOM.render(<Login />, mountNode)
+
+
+
+
+			  
+		 
+    
+	   
+		   
+	 
+  
+  
+   

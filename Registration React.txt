@@ -1,0 +1,222 @@
+ class Login extends React.Component{
+   constructor(props){
+     super(props); 
+ this.state={
+    inputsDisabled: false,
+   firstname: "", 
+   lastname: "",
+   username: "",
+   emailid: "",
+   password: "",
+   mobileno: "",
+   gender: "",
+   dateofbirth: ""
+ }
+ };
+ 
+ modifyState = () => {
+  this.setState({ inputsDisabled: true })
+}
+
+ emailValidation() {
+     var email=document.getElementById("emailid");
+     var validemail=/^[A-z]*[0-9]+[A-z]*@[a-z]*.com/
+     if(validemail.test(email)){
+        return;
+        }
+    else{
+       modifyState();
+    }
+    
+    }
+  
+mobileValidation(){
+     var no=document.getElementById("mobileno");
+     var validno=/^[789]\d{9}$/
+       if(validno.test(no)){
+           return;
+           }
+        else{
+          modifyState();
+          }
+    }
+  
+  resumeValidation(){
+     if(e.target.input.files.length){
+         const upload_file=e.target.input.files[0];
+         const formdate=new formData();
+         formData.append('file',file);
+         
+         const request= axios.post(this.props.url + '/upload',file)
+         .then(function(response){
+              return;
+            
+            modifyState();
+            }
+            );
+            }
+    }
+      
+  handleClick =(e) => {
+  this.setState({
+     [e.target.name]: e.target.value
+  });
+  };
+  
+  
+ render(){
+ 
+ 
+  
+   const self = this;
+   return(
+      <div>
+        <br />
+            <div classNAme="firstname">
+                    <input 
+                            name="firstname"
+                            placeholder="Firstname"
+                            required
+                            value={this.state.firstname}
+                            onChange ={e => self.handleClick(e)}
+                    />
+            </div> 
+        <br />
+        
+            <div className="lastname">
+                    <input
+                            name="lastname"
+                            placeholder="Lastname"
+                            required
+                            value={this.state.lastname}
+                            onChange ={e => self.handleClick(e)}
+            />
+            </div>
+       <br />
+       
+          <div className="username">
+               <input 
+                  name="username"
+                            placeholder="Username"
+                            required minLength={5} maxLength={15}
+                            value={this.state.username}
+                            onChange ={e => self.handleClick(e)}
+                        />
+            </div>
+          
+          
+       <br />
+       
+          <div className="password">
+              <input 
+                            name="password"
+                            placeholder="Password"
+                            type="password"
+                            required minLength={8} maxLength={15}
+                            value={this.state.password}
+                            onChange ={e => self.handleClick(e)}
+       
+                    />
+          </div>
+          
+       <br />
+          <div className="emailid">
+              <input 
+                            name="emailid"
+                            placeholder="emailid"
+                            required 
+                            value={this.state.emailid}
+                            onChange ={e => {self.handleClick(e);self.emailValidation(e);}}
+             />
+          </div>
+       <br />
+       
+          <div className="mobileno">
+                    <input 
+                            name="mobileno"
+                            placeholder="mobileno"
+                            required minLength={10}
+                            value={this.state.mobileno}
+                            onChange ={e => {self.handleClick(e);self.mobileValidation(e)}}
+                    />
+          </div>
+       <br />
+       
+     <div className="gender">
+                <label>
+                    <input type="radio" value="male"  onClick = {self.modifyState} disabled={ this.state.inputsDisabled }/>MALE
+                </label>
+         </div>
+         <div className="gender">
+             <label>
+                 <input type="radio"  value="female" onClick = {self.modifyState} disabled={ this.state.inputsDisabled }/>FEMALE
+            </label>
+         </div>
+         
+        
+        <br />
+        
+        <div className="upload Resume">
+           <input
+                type="file"
+                placeholder="upload resume"
+                required
+                value={this.props.value}
+                onChange ={e => "handleClick(e);resumeValidation(e)"}/>
+        </div>
+                
+         
+       <div className="button">
+           <button  type="submit" onClick = {self.modifyState} disabled={ this.state.inputsDisabled }>
+              submit
+           </button>
+       </div>
+       
+       <br />
+       
+    </div>
+       
+       
+   );
+ }
+}
+
+ReactDOM.render(<Login url = "http://jscomplete.com" />, mountNode)
+
+
+var mysql = require('mysql')
+var connection = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'dbuser',
+  password : 's3kreee7',
+  database : 'my_db'
+});
+
+connection.connect()
+
+connection.query('SELECT 1 + 1 AS solution', function (err, rows, fields) {
+  if (err) throw err
+
+  console.log('The solution is: ', rows[0].solution)
+})
+
+connection.end()
+
+
+https://codeburst.io/displaying-error-messages-in-react-with-a-higher-order-component-hoc-fe2de074bf64
+
+
+div className="gender">
+                <label>
+                    <input type="radio" value="male"/>MALE
+                </label>
+         </div>
+      
+      <br />
+         <div className="gender">
+             <label>
+                 <input type="radio"  value="female"/>FEMALE
+            </label>
+         </div>
+		 https://medium.com/@avanthikameenakshi/crud-react-express-99025f03f06e
+
